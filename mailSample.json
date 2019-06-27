@@ -1,0 +1,48 @@
+{
+  "list": [
+    {
+      "mail_id": "478887896",
+      "mail_from": "rundoom1337@gmail.com",
+      "mail_subject": "1212",
+      "mail_excerpt": "12121",
+      "mail_timestamp": "1561400169",
+      "mail_read": "0",
+      "mail_date": "18:16:09",
+      "att": "0",
+      "mail_size": "2537"
+    },
+    {
+      "mail_from": "no-reply@guerrillamail.com",
+      "mail_timestamp": 0,
+      "mail_read": 0,
+      "mail_date": "18:13:25",
+      "reply_to": "",
+      "mail_subject": "Welcome to Guerrilla Mail",
+      "mail_excerpt": "Dear Random User,\r\n\r\nThank you for using Guerrilla Mail - your temporary email address friend and spam fighter's ally!\r\n\r\nYour disposable email address has been created ready for use.\r\n\r\nEmail: ufvneb",
+      "mail_id": 1,
+      "att": 0,
+      "content_type": "text",
+      "mail_recipient": "ufvnebew",
+      "source_id": 0,
+      "source_mail_id": 0,
+      "mail_body": "Dear Random User,\r\n\r\nThank you for using Guerrilla Mail - your temporary email address friend and spam fighter's ally!\r\n\r\nYour disposable email address has been created ready for use.\r\n\r\nEmail: ufvnebew@sharklasers.com\r\n\r\nTips & Notes:\r\n\r\n- You can change this email address! Place your mouse over the Inbox ID at the top of this page and click to edit.\r\n\r\n- Once you change to a new address, the old address will remain available, simply change back to it. (Note: email is kept for 1 hour)\r\n\r\n- Waiting for your mail? There is no need to refresh the page, new emails will be added to the list as they come in.\r\n\r\n- All Emails are deleted after 1 hour.\r\n\r\nClick on the back the \"« Back to inbox\" to go back to the mail list\r\n\r\nThanks,\r\n\r\nGuerrilla Mail Team\r\nhttp://www.guerrillamail.com/\r\n\r\n\"Free to download, but you have to give your email address so they can inevitably attempt to sell you stuff in the future? guerrillamail.com FTW!\"\r\n\r\nConnect with us:\r\nhttps://www.facebook.com/GuerrillaMail\r\nhttps://twitter.com/GuerrillaMail",
+      "size": 1034
+    }
+  ],
+  "count": "1",
+  "email": "ufvnebew@guerrillamailblock.com",
+  "alias": "hrljth+40s66qg4j8xlo",
+  "ts": 1561400005,
+  "sid_token": "9148tcuvdkcg83thpukooopa96",
+  "stats": {
+    "sequence_mail": "57,719,096",
+    "created_addresses": 38163242,
+    "received_emails": "11,401,807,945",
+    "total": "11,344,088,849",
+    "total_per_hour": "72849"
+  },
+  "auth": {
+    "success": true,
+    "error_codes": []
+  }
+}
