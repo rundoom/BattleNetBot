@@ -15,7 +15,6 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.delay
 import org.openqa.selenium.chrome.ChromeDriver
 import java.io.File
-import java.net.URL
 import java.util.*
 import kotlin.random.Random
 
@@ -35,24 +34,30 @@ suspend fun registerOnBattleNet(
     driver.findElementById("emailAddress").sendKeys(email.await().emailAddr)
     driver.findElementById("password").sendKeys(password)
     driver.findElementById("answer1").sendKeys("1")
-//*[@id="account-creation"]/fieldset[5]/div/div/label
-    driver.findElementByXPath("agreedToPrivacyPolicy")
+
+    driver.findElementByXPath("//input[@id=\"agreedToPrivacyPolicy\"]/..").click()
 
     driver.findElementByCssSelector("#select-box-dobMonth > span.current > span").click()
     driver.executeScript("document.getElementById('dobMonth').value = 1")
     driver.executeScript("document.getElementById('question1').value = 19")
 
     val captcha = driver.findElementsById("security-image")
-    if (captcha.size != 0) {
+    if (captcha.isNotEmpty()) {
         val captUrl = captcha.first().getAttribute("src")
-        val captBytes = URL(captUrl).readBytes()
+
+        val captBytes = Fuel.get(captUrl)
+            .header("Cookie" to driver.manage().cookies.find { it.name == "JSESSIONID" }.toString())
+            .response().third.get()
+
         val base64Image = Base64.getEncoder().encodeToString(captBytes)
         driver.findElementById("captchaInput").sendKeys(solveCaptcha(base64Image))
     }
 
     driver.findElementById("creation-submit-button").click()
 
-    writeUserCredentials(email.await().emailAddr, password)
+    if (driver.findElementsByClassName("success-content").isNotEmpty()) {
+        writeUserCredentials(email.await().emailAddr, password)
+    }
 }
 
 fun writeUserCredentials(userMail: String, userPass: String) {

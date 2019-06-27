@@ -6,35 +6,46 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import java.io.File
 import java.net.HttpCookie
 
-suspend fun main() = coroutineScope {
-    System.setProperty("webdriver.chrome.driver", File("chromedriver_win32\\chromedriver.exe").absolutePath)
+fun main() {
+    runBlocking { runApp() }
+}
 
-    val opts = ChromeOptions().also {
-        //        it.addArguments("--headless")
-    }
+suspend fun runApp() {
+    coroutineScope {
+        System.setProperty(
+            "webdriver.chrome.driver",
+            File("chromedriver_win32\\chromedriver_74.0.3729.6.exe").absolutePath
+        )
 
-    repeat(3) {
-        launch {
-            val driver = ChromeDriver(opts)
-            val email = async {
-                val resp = Fuel.get("http://api.guerrillamail.com/ajax.php", listOf("f" to "get_email_address"))
-                    .header(
-                        "User-Agent" to "PostmanRuntime/7.15.0"
-                    ).responseObject(TempEmailAddress)/*.third.component1()*/
+        val opts = ChromeOptions().also {
+            //        it.addArguments("--headless")
+        }
 
-                val sessionId =
-                    resp.second.headers["Set-Cookie"].flatMap { HttpCookie.parse(it) }.find { it.name == "PHPSESSID" }
-                        ?.value
-                resp.third.get()
-            }
+        repeat(5) {
+            launch {
+                val driver = ChromeDriver(opts)
+                val email = async {
+                    val resp = Fuel.get("http://api.guerrillamail.com/ajax.php", listOf("f" to "get_email_address"))
+                        .header(
+                            "User-Agent" to "PostmanRuntime/7.15.0"
+                        ).responseObject(TempEmailAddress)/*.third.component1()*/
 
-            registerOnBattleNet(driver, email)
+                    val sessionId =
+                        resp.second.headers["Set-Cookie"].flatMap { HttpCookie.parse(it) }
+                            .find { it.name == "PHPSESSID" }
+                            ?.value
+                    resp.third.get()
+                }
+
+                registerOnBattleNet(driver, email)
 //            driver.quit()
+            }
         }
     }
 }
